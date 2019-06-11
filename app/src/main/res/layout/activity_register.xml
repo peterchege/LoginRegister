@@ -75,19 +75,7 @@
                 android:textSize="12dp" />
 
             <EditText
-                android:id="@+id/eT_phone"
-                android:layout_width="230dp"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Phone Number"
-                android:inputType="phone"
-                android:paddingLeft="10dp"
-                android:paddingTop="20dp"
-                android:paddingBottom="20dp"
-                android:textSize="12dp" />
-
-            <EditText
-                android:id="@+id/eT_amount"
+                android:id="@+id/eT_school"
                 android:layout_width="230dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -112,7 +100,7 @@
     </android.support.v7.widget.CardView>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/buttonSignUp"
         android:layout_width="200dp"
         android:layout_height="40dp"
         android:layout_gravity="center"
