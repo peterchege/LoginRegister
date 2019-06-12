@@ -1,5 +1,6 @@
 package com.example.herihomes.Activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Patterns;
@@ -109,6 +110,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 userSignUp();
                 break;
             case R.id.tv_login:
+                startActivity(new Intent(this, LoginActivity.class));
                 break;
         }
     }

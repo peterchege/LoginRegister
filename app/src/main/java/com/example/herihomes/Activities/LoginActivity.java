@@ -9,8 +9,15 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.herihomes.R;
+import com.example.herihomes.api.RetrofitClient;
+import com.example.herihomes.models.LoginResponse;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginActivity extends Activity implements View.OnClickListener {
 
@@ -60,6 +67,30 @@ public class LoginActivity extends Activity implements View.OnClickListener {
             editTextPassword.requestFocus();
             return;
         }
+
+        Call<LoginResponse> call = RetrofitClient
+                .getInstance().getApi().userLogin(email, password);
+
+        call.enqueue(new Callback<LoginResponse>() {
+            @Override
+            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                LoginResponse loginResponse = response.body();
+
+                if(!loginResponse.isError()){
+                   //save user
+                   // open profile
+
+                    Toast.makeText(LoginActivity.this, loginResponse.getMessage(),Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(LoginActivity.this, loginResponse.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<LoginResponse> call, Throwable t) {
+
+            }
+        });
     }
 
     @Override
