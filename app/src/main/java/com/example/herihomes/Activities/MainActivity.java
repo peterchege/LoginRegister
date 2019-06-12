@@ -6,17 +6,31 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.herihomes.R;
+import com.example.herihomes.models.User;
 import com.example.herihomes.storage.SharedPrefManager;
 
 public class MainActivity extends Activity {
 
+    private TextView textViewName, textViewEmail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
+
+
+        textViewName =findViewById(R.id.tv_name);
+        textViewEmail =findViewById(R.id.tv_email);
+
+        User user = SharedPrefManager.getInstance(this).getUser();
+
+        textViewName.setText("Welcome " + user.getName());
+        textViewEmail.setText(user.getEmail());
+
+
 
 
         final ImageView iV_dashboard =(ImageView)findViewById(R.id.iV_dashboard);
