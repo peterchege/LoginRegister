@@ -60,11 +60,11 @@
                 <!--android:textSize="16sp" />-->
 
             <EditText
-                android:id="@+id/eT_username"
+                android:id="@+id/eT_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="username"
+                android:hint="Email"
                 android:paddingTop="20dp"
                 android:paddingBottom="20dp"
                 android:inputType="textEmailAddress"
@@ -89,7 +89,7 @@
                 android:inputType="textPassword"
                 android:textSize="13sp" />
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/tv_register"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
