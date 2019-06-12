@@ -1,6 +1,7 @@
 package com.example.herihomes.api;
 
 import com.example.herihomes.DefaultResponse;
+import com.example.herihomes.models.LoginResponse;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -17,5 +18,12 @@ public interface Api {
                 @Field("password") String password,
                 @Field("name") String name,
                 @Field("school") String school
+    );
+
+    @FormUrlEncoded
+    @POST("userlogin")
+    Call<LoginResponse> userLogin(
+                @Field("email")String email,
+                @Field("password") String password
     );
 }
