@@ -5,7 +5,14 @@ import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import java.io.IOException;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener{
@@ -39,7 +46,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             return;
         }
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-            editTextEmail.setError("Enter a Vaalid email");
+            editTextEmail.setError("Enter a Valid email");
             editTextEmail.requestFocus();
             return;
         }
@@ -64,7 +71,31 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             return;
         }
 
-        /* Do user registration using the api call*/
+       Call<ResponseBody> call = RetrofitClient
+               .getInstance()
+               .getApi()
+               .createUser(email, password, name, school);
+
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                try {
+                    String s = response.body().string();
+                    Toast.makeText(RegisterActivity.this, s, Toast.LENGTH_SHORT).show();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Toast.makeText(RegisterActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
     @Override
     public void onClick(View v) {
