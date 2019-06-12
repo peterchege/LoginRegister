@@ -1,4 +1,4 @@
-package com.example.herihomes;
+package com.example.herihomes.Activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -6,6 +6,9 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.herihomes.R;
+import com.example.herihomes.api.RetrofitClient;
 
 import java.io.IOException;
 

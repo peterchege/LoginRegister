@@ -1,12 +1,13 @@
-package com.example.herihomes;
+package com.example.herihomes.Activities;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Window;
 import android.widget.ImageView;
+
+import com.example.herihomes.R;
 
 public class LandingActivity extends Activity {
 

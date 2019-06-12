@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/backgrd"
-    tools:context=".LandingActivity">
+    tools:context=".Activities.LandingActivity">
 
     <ImageView
         android:id="@+id/iV_logo"

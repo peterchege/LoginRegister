@@ -1,4 +1,4 @@
-package com.example.herihomes;
+package com.example.herihomes.api;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
