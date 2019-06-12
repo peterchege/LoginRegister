@@ -24,7 +24,7 @@ public class LandingActivity extends Activity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(LandingActivity.this,LoginActivity.class);
+                Intent intent = new Intent(LandingActivity.this,RegisterActivity.class);
                 startActivity(intent);
                 finish();
             }

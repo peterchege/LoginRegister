@@ -79,15 +79,18 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-
                 try {
-                    String s = response.body().string();
-                    Toast.makeText(RegisterActivity.this, s, Toast.LENGTH_SHORT).show();
+                    if(response.code() == 201) {
+                        String s = response.body().string();
+                        Toast.makeText(RegisterActivity.this, s, Toast.LENGTH_SHORT).show();
+
+                  }else {
+                        String s = response.errorBody().string();
+                        Toast.makeText(RegisterActivity.this, s, Toast.LENGTH_SHORT).show();
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
-
             }
 
             @Override
