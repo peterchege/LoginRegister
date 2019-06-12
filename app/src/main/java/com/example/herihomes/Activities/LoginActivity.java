@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.example.herihomes.R;
 import com.example.herihomes.api.RetrofitClient;
 import com.example.herihomes.models.LoginResponse;
+import com.example.herihomes.storage.SharedPrefManager;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -23,6 +24,17 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
     private EditText editTextEmail;
     private EditText editTextPassword;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if(SharedPrefManager.getInstance(this).isLoggedIn()){
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK );
+            startActivity(intent);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +50,8 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
        findViewById(R.id.bt_login).setOnClickListener(this);
        findViewById(R.id.tv_register).setOnClickListener(this);
+
+
 
 
     }
@@ -77,8 +91,19 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                 LoginResponse loginResponse = response.body();
 
                 if(!loginResponse.isError()){
-                   //save user
+
+                    //save user
+
+                    SharedPrefManager.getInstance(LoginActivity.this)
+                            .saveUser(loginResponse.getUser());
+
                    // open profile
+
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK );
+                    startActivity(intent);
+
+
 
                     Toast.makeText(LoginActivity.this, loginResponse.getMessage(),Toast.LENGTH_LONG).show();
                 } else {

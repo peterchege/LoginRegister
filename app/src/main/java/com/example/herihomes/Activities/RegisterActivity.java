@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.example.herihomes.DefaultResponse;
 import com.example.herihomes.R;
 import com.example.herihomes.api.RetrofitClient;
+import com.example.herihomes.storage.SharedPrefManager;
 
 import java.io.IOException;
 
@@ -37,6 +38,17 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         findViewById(R.id.buttonSignUp).setOnClickListener(this);
         findViewById(R.id.tv_login).setOnClickListener(this);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if(SharedPrefManager.getInstance(this).isLoggedIn()){
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK );
+            startActivity(intent);
+        }
     }
 
     private  void userSignUp(){

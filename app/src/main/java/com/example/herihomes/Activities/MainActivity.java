@@ -8,6 +8,7 @@ import android.view.Window;
 import android.widget.ImageView;
 
 import com.example.herihomes.R;
+import com.example.herihomes.storage.SharedPrefManager;
 
 public class MainActivity extends Activity {
 
@@ -16,6 +17,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
+
 
         final ImageView iV_dashboard =(ImageView)findViewById(R.id.iV_dashboard);
         iV_dashboard.setImageResource(R.drawable.dashboard);
@@ -51,5 +53,16 @@ public class MainActivity extends Activity {
                 MainActivity.this.startActivity(intent);
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if(!SharedPrefManager.getInstance(this).isLoggedIn()){
+            Intent intent = new Intent(this, LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK );
+            startActivity(intent);
+        }
     }
 }
