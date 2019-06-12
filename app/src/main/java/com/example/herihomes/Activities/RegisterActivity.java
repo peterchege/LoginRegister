@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.herihomes.DefaultResponse;
 import com.example.herihomes.R;
 import com.example.herihomes.api.RetrofitClient;
 
@@ -74,35 +75,33 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             return;
         }
 
-       Call<ResponseBody> call = RetrofitClient
+       Call<DefaultResponse> call = RetrofitClient
                .getInstance()
                .getApi()
                .createUser(email, password, name, school);
 
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<DefaultResponse>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    if(response.code() == 201) {
-                        String s = response.body().string();
-                        Toast.makeText(RegisterActivity.this, s, Toast.LENGTH_SHORT).show();
+            public void onResponse(Call<DefaultResponse> call, Response<DefaultResponse> response) {
 
-                  }else {
-                        String s = response.errorBody().string();
-                        Toast.makeText(RegisterActivity.this, s, Toast.LENGTH_SHORT).show();
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
+                if(response.code() == 201){
+
+                    DefaultResponse dr = response.body();
+                    Toast.makeText(RegisterActivity.this, dr.getMsg(), Toast.LENGTH_LONG).show();
+
+                }else if (response.code() == 422){
+                    Toast.makeText(RegisterActivity.this, "user already exist" , Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Toast.makeText(RegisterActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<DefaultResponse> call, Throwable t) {
+
             }
         });
 
     }
+
     @Override
     public void onClick(View v) {
         switch(v.getId()){
