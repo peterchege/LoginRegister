@@ -2,62 +2,47 @@ package com.example.herihomes.Activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.herihomes.R;
+import com.example.herihomes.fragments.HomeFragment;
+import com.example.herihomes.fragments.SettingsFragment;
+import com.example.herihomes.fragments.UsersFragment;
 import com.example.herihomes.models.User;
 import com.example.herihomes.storage.SharedPrefManager;
 
-public class ProfileActivity extends Activity {
+public class ProfileActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
-    private TextView textViewName, textViewEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_profile);
 
-        textViewName =findViewById(R.id.tv_name);
-        textViewEmail =findViewById(R.id.tv_email);
+        BottomNavigationView navigationView = findViewById(R.id.bottom_nav);
+        navigationView.setOnNavigationItemSelectedListener(this);
 
-        User user = SharedPrefManager.getInstance(this).getUser();
+        displayFragment(new HomeFragment());
+    }
 
-        textViewName.setText("Welcome " + user.getName());
-        textViewEmail.setText(user.getEmail());
+    private void displayFragment(Fragment fragment){
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.relative_layout, fragment)
+                .commit();
 
-
-
-
-        final ImageView iV_dashboard =(ImageView)findViewById(R.id.iV_dashboard);
-        iV_dashboard.setImageResource(R.drawable.dashboard);
-
-        final ImageView iV_peter =(ImageView)findViewById(R.id.iV_peter);
-        iV_peter.setImageResource(R.drawable.peter);
-
-
-
-        final ImageView iv_pay = (ImageView)findViewById(R.id.iv_pay);
-        iv_pay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ProfileActivity.this, PayRentActivity.class);
-                ProfileActivity.this.startActivity(intent);
-            }
-        });
-        final ImageView iv_pay_schedule = (ImageView)findViewById(R.id.iv_pay_schedule);
-        iv_pay_schedule.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ProfileActivity.this, PaymentScheduleActivity.class);
-                ProfileActivity.this.startActivity(intent);
-            }
-        });
     }
 
     @Override
@@ -69,5 +54,28 @@ public class ProfileActivity extends Activity {
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK );
             startActivity(intent);
         }
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+        Fragment fragment = null;
+
+        switch (menuItem.getItemId()){
+            case R.id.menu_home:
+                fragment = new HomeFragment();
+                break;
+            case R.id.menu_users:
+                fragment= new UsersFragment();
+                break;
+            case R.id.menu_settings:
+                fragment = new SettingsFragment();
+                break;
+        }
+
+        if(fragment != null){
+            displayFragment(fragment);
+        }
+        return false;
     }
 }

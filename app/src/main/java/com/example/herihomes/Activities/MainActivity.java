@@ -51,6 +51,15 @@ public class MainActivity extends Activity {
         final ImageView iv_logout =(ImageView)findViewById(R.id.iv_logout);
         iv_logout.setImageResource(R.drawable.logout);
 
+        final ImageView iv_account = (ImageView)findViewById(R.id.iv_account);
+        iv_account.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+                MainActivity.this.startActivity(intent);
+            }
+        });
+
         final ImageView iv_pay = (ImageView)findViewById(R.id.iv_pay);
         iv_pay.setOnClickListener(new View.OnClickListener() {
             @Override
