@@ -2,6 +2,7 @@ package com.example.herihomes.api;
 
 import com.example.herihomes.DefaultResponse;
 import com.example.herihomes.models.LoginResponse;
+import com.example.herihomes.models.UserResponse;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -29,5 +30,5 @@ public interface Api {
     );
 
     @GET("allusers")
-    call<>
+    Call<UserResponse> getUsers();
 }

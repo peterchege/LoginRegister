@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".PaydatesActivity"></activity>
+        <activity android:name=".Activities.ProfileActivity"></activity>
+        <activity android:name=".PaydatesActivity" />
         <activity android:name=".Activities.RegisterActivity" />
         <activity android:name=".Activities.PaymentScheduleActivity" />
         <activity android:name=".Activities.PayRentActivity" />
