@@ -5,18 +5,18 @@ import java.util.List;
 public class UserResponse {
 
     private boolean error;
-    private List<User> user;
+    private List<User> users;
 
     public UserResponse(boolean error, List<User> user) {
         this.error = error;
-        this.user = user;
+        this.users = users;
     }
 
     public boolean isError() {
         return error;
     }
 
-    public List<User> getUser() {
-        return user;
+    public List<User> getUsers() {
+        return users;
     }
 }
